@@ -1,3 +1,3 @@
-The Odin Project
-Foundations
+The Odin Project  
+Foundations  
 Rock Paper Scissors
