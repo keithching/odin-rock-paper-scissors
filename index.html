@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Rock Paper Scissors</title>
-    </head>
-    <body>
-        <script src="script.js"></script>
-        <h1>Rock Paper Scissors</h1>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <span>Rock Paper Scissors &#9994; &#9995; &#9996;</span>
+    </div>
+
+    <div class="message"></div>
+
+    <div class="buttons">
+        <button id="Rock">&#9994;</button>
+        <button id="Paper">&#9995;</button>
+        <button id="Scissors">&#9996;</button>            
+    </div>
+
+    <div class="bottom">
+        <div class="scores">
+            <h3>Scores</h3>
+            <div class="score playerScore"></div>
+            <div class="score computerScore"></div>
+        </div>
+
+        <div class="results">
+            <h3>Results</h3>
+            <p></p>
+        </div>
+    </div>
+
+
+</body>
 </html>

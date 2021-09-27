@@ -62,81 +62,71 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// Write a NEW function called game(). 
-// Use the previous function inside of this one to play a 5 round game that 
-// keeps score and reports a winner or loser at the end.
-function game() {
 
-    // create variables to count the scores of the player and the computer
-    // initializes them with score of 0
-    let playerScore = 0;
-    let computerScore = 0;
 
-    // 5 rounds of game
-    for (let i = 0; i < 5; i++) {
+// display running score
+let playerScore = 0;
+let computerScore = 0;
+let gameWinner;
 
-        // Use prompt() to get input from the user
-        let playerSelection = prompt(`Game ${i+1}: Rock, Paper, or Scissors?`, '');
+let playerScoreDisplay = document.querySelector('.playerScore');
+let computerScoreDisplay = document.querySelector('.computerScore');
 
-        // if the player hits Esc or Cancel, return from the function for cancellation of program
-        if (playerSelection === null) {
-            alert('game canceled');
-            return;
-        }
+playerScoreDisplay.textContent = 'player: ' + playerScore;
+computerScoreDisplay.textContent = 'computer: ' + computerScore;
 
-        // reformat the playSelection string so only the first letter is capitalized
-        // Make the function’s playerSelection parameter case-insensitive 
-        // (so users can input rock, ROCK, RocK or any other variation)
-        playerSelection = playerSelection.slice(0, 1).toUpperCase() + playerSelection.slice(1).toLowerCase();
-        
-        // ask the player to reinput if the string provided is not either one of the above
-        while (!(playerSelection === 'Rock' || playerSelection === 'Paper' || playerSelection === 'Scissors')) {
-            playerSelection = prompt(`typo? please try again.\nGame ${i+1}: Rock, Paper, or Scissors?`, '');
-     
-            // if the player hits Esc or Cancel, return from the function for cancellation of program
-            if (playerSelection === null) {
-                alert('game canceled');
-                return;
-            }
+// feature branch - UI
+const buttons = document.querySelectorAll('button');
+buttons.forEach(btn => btn.addEventListener('click', () => {
 
-            playerSelection = playerSelection.slice(0, 1).toUpperCase() + playerSelection.slice(1).toLowerCase();
-        }
+    let thisRoundResult = playRound(btn.id, computerPlay());
 
-        console.log(`playerSelection: ${playerSelection}`);
+    const results = document.querySelector('.results p');
 
-        // call the computerPlay() function and store the return value in computerSelection
-        let computerSelection = computerPlay();
+    // animation of click event
+    btn.classList.add('click');
 
-        console.log(`computerSelection: ${computerSelection}`);
+    // decide game winner
+    if (!gameWinner) {
 
-        // store the playRound result in a variable named thisRoundResult
-        let thisRoundResult = playRound(playerSelection, computerSelection);
+        // display round result
+        results.textContent = thisRoundResult;
 
-        // using console.log() to display the results of each round
-        console.log(thisRoundResult);
-
-        // increment the score by conditional checks
+        // increment score
         if (thisRoundResult.includes('Win')) {
             playerScore++;
         } else if (thisRoundResult.includes('Lose')) {
             computerScore++;
         }
-        console.log(`Current playerScore is ${playerScore}`);
-        console.log(`Current computerScore is ${computerScore}`);
-    }
-    // console log for the winner at the end
-    console.log(`Final playerScore is ${playerScore}`);
-    console.log(`Final computerScore is ${computerScore}`);
+        playerScoreDisplay.textContent = 'player: ' + playerScore;
+        computerScoreDisplay.textContent = 'computer: ' + computerScore;
+        
+        // announce winner once one player reaches 5 points
+        if (playerScore >= 5) {
+            gameWinner = 'player';
+            playerScoreDisplay.classList.add('winner');
+            const message = document.querySelector('.message');
+            message.textContent = 'YOU WIN!';
+            message.classList.add('flash');
 
-    if (playerScore > computerScore) {
-        alert('Player Wins!');
-    } else if (playerScore < computerScore) {
-        alert('Computer Wins!');
-    } else {
-        alert('Tie Games!');
-    }
-}
+        } else if (computerScore >= 5) {
+            gameWinner = 'computer';
+            computerScoreDisplay.classList.add('winner');
+            const message = document.querySelector('.message');
+            message.textContent = 'YOU LOSE...';
+            message.classList.add('flash');
+        }
+    } 
+}));
 
 
-// call the game() function
-game();
+function removeTransition(e) {
+    if(e.propertyName !== 'transform') return; // skip it if it's not a transform
+    this.classList.remove('click');
+  }
+
+
+const btns = document.querySelectorAll('button');
+btns.forEach(btn => btn.addEventListener('transitionend', removeTransition));
+
+
