@@ -1,0 +1,100 @@
+body {
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.header {
+    padding: 50px 150px;
+    font-size: 50px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header, .scores, .results {
+    background-color: rgb(237, 236, 236);
+}
+
+.message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease;
+}
+
+.flash {
+    font-size: 80px;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0 50px;
+    margin-bottom: 50px;
+
+}
+
+button {
+    padding: 10px;
+    width: 150px;
+    height: 150px;
+    margin: 0;
+    font-size: 100px;
+    border: solid;
+    border-radius: 10px;
+    transition: all 0.1s ease;
+}
+
+.score {
+    transition: all .1s;
+    margin: 5px;
+}
+
+.winner {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.bottom {
+    display: flex;
+    justify-content: center;
+}
+
+.scores, .results {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    height: 100px;
+}
+
+.scores {
+    width: 200px;
+}
+
+.results {
+    width: 400px;
+}
+
+.results p {
+    height: 20px;
+    transition: all .1s ease;
+}
+
+.click {
+    transform: scale(1.1);
+    border-width: 5px;
+    border-color: yellow;
+}
